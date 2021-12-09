@@ -14,7 +14,26 @@
 <script>
 export default {
   name: "CirComponent",
-  props: ["unit", "initialPos"],
+  props: {
+    unit: {
+      type: Object,
+      default() {
+        return {
+          x: 1,
+          y: 1
+        }
+      }
+    },
+    initialPos: {
+      type: Object,
+      default() {
+        return {
+          x: 0,
+          y: 0
+        }
+      }
+    }
+  },
   inject: ["getOrigin", "getUnitLength"],
   data() {
     return {

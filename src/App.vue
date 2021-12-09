@@ -2,7 +2,7 @@
   <div id="app">
     <CirContainer>
       <CirComponent :unit="{ x: 2, y: 3 }" :initialPos="{ x: 5, y: 6 }" />
-      <CirComponent :unit="{ x: 3, y: 2 }" :initialPos="{ x: 12, y: 13 }" />
+      <CirComponent />
     </CirContainer>
   </div>
 </template>
@@ -10,14 +10,7 @@
 <script>
 export default {
   name: "App",
-  data() {
-    return {};
-  },
-  methods: {
-    test(e) {
-      console.log(e);
-    }
-  }
+
 }
 </script>
 

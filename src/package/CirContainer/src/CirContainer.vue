@@ -21,6 +21,12 @@ export default {
       getUnitLength: () => this.unitLength
     };
   },
+  props: {
+    initialUnitLength: {
+      type: Number,
+      default: 50
+    }
+  },
   data() {
     return {
       origin: {
@@ -40,6 +46,7 @@ export default {
     };
   },
   mounted() {
+    this.unitLength = this.initialUnitLength;
     let removeSpace, catchSpace;
     removeSpace = e => {
       if (e.key === " ") {

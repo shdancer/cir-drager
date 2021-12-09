@@ -7,7 +7,6 @@ const components = [
 ];
 
 const install = Vue => {
-  console.log("fuc")
   if (install.installed)
     return;
   install.installed = true;
@@ -15,7 +14,7 @@ const install = Vue => {
   components.map(component => Vue.use(component));
 }
 
-if (window !== undefined && window.Vue) {
+if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue);
 }
 
