@@ -1,17 +1,22 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <CirContainer>
+      <CirComponent :unit="{ x: 2, y: 3 }" :initialPos="{ x: 5, y: 6 }" />
+      <CirComponent :unit="{ x: 3, y: 2 }" :initialPos="{ x: 12, y: 13 }" />
+    </CirContainer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "App",
+  data() {
+    return {};
+  },
+  methods: {
+    test(e) {
+      console.log(e);
+    }
   }
 }
 </script>
@@ -23,6 +28,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  height: 90vh;
 }
 </style>
