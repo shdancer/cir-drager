@@ -63,3 +63,5 @@ export default {
 ```
 ## TODO
 - [ ] 加入导线组件
+- [x] 重构部分代码
+- [x] 修复事件冒泡bug

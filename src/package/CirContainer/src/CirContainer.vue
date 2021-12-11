@@ -4,20 +4,24 @@
     :style="{
       backgroundImage: `linear-gradient(to top,transparent ${unitLength * 0.95}px,gray ${unitLength}px), linear-gradient(to left,transparent ${unitLength * 0.95}px,gray ${unitLength}px)`,
       backgroundSize: `${unitLength}px ${unitLength}px`,
-      backgroundPosition: `${-origin.x}px ${-origin.y}px`
+      backgroundPosition: `${-origin.x + delta.x}px ${-origin.y + delta.y}px`
     }"
-    @mousedown="down"
   >
     <slot></slot>
   </div>
 </template>
 
 <script>
+import drager from "../../mixin/drager";
 export default {
   name: "CirContainer",
+  mixins: [drager],
   provide() {
     return {
-      getOrigin: () => this.origin,
+      getOrigin: () => ({
+        x: this.origin.x - this.delta.x,
+        y: this.origin.y - this.delta.y
+      }),
       getUnitLength: () => this.unitLength
     };
   },
@@ -33,16 +37,8 @@ export default {
         x: 0,
         y: 0
       },
-      oldOrigin: {
-        x: 0,
-        y: 0
-      },
       unitLength: 50,
       onDrag: false,
-      startX: undefined,
-      startY: undefined,
-      endX: undefined,
-      endY: undefined,
     };
   },
   mounted() {
@@ -70,41 +66,17 @@ export default {
         this.unitLength += e.deltaY / 200;
     });
   },
-  methods: {
-    down(e) {
-      if (!this.onDrag) {
+  watch: {
+    finishDrag() {
+      if (this.finishDrag === false)
         return;
-      }
-      this.startX = e.x;
-      this.startY = e.y;
-      const recordMouse = (e) => {
-        this.endX = e.x;
-        this.endY = e.y;
-        this.origin = {
-          x: this.oldOrigin.x - this.deltaX,
-          y: this.oldOrigin.y - this.deltaY
-        };
-      }
-      document.addEventListener("mousemove", recordMouse);
-      document.addEventListener("mouseup", () => {
-        document.removeEventListener("mousemove", recordMouse);
-        this.oldOrigin = this.origin;
-        this.startX = this.startY = this.endX = this.endY = undefined;
-      });
-    }
-  },
-  computed: {
-    deltaX() {
-      if ([this.startX, this.endX].includes(undefined)) {
-        return 0;
-      }
-      return this.endX - this.startX;
-    },
-    deltaY() {
-      if ([this.startY, this.endY].includes(undefined)) {
-        return 0;
-      }
-      return this.endY - this.startY;
+      this.finishDrag = false;
+      this.origin = {
+        x: this.origin.x - this.delta.x,
+        y: this.origin.y - this.delta.y
+      };
+
+      this.resetDrager();
     }
   }
 }

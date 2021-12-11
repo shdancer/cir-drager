@@ -1,9 +1,11 @@
 import CirComponent from "./CirComponent";
 import CirContainer from "./CirContainer";
+import CirWire from "./CirWire";
 
 const components = [
   CirComponent,
-  CirContainer
+  CirContainer,
+  CirWire
 ];
 
 const install = Vue => {
