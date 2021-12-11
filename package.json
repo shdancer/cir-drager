@@ -13,6 +13,9 @@
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
   },
+  "repository": {
+    "url": "https://github.com/shdancer/cir-drager"
+  },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
