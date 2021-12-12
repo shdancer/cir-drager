@@ -22,7 +22,8 @@ export default {
         x: this.origin.x - this.delta.x,
         y: this.origin.y - this.delta.y
       }),
-      getUnitLength: () => this.unitLength
+      getUnitLength: () => this.unitLength,
+      getCanvasOnDrag: () => this.onDrag
     };
   },
   props: {
@@ -43,15 +44,14 @@ export default {
   },
   mounted() {
     this.unitLength = this.initialUnitLength;
-    let removeSpace, catchSpace;
-    removeSpace = e => {
+    const removeSpace = e => {
       if (e.key === " ") {
         this.onDrag = false;
         document.removeEventListener("keyup", removeSpace);
         document.addEventListener("keydown", catchSpace);
       }
     }
-    catchSpace = e => {
+    const catchSpace = e => {
       if (e.key === " ") {
         this.onDrag = true;
         this.oldOrigin = this.origin;
